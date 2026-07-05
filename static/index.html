@@ -30,9 +30,9 @@
         html.dark .text-slate-500 { color: #94a3b8; }
         html.dark .text-slate-400 { color: #64748b; }
         html.dark .text-slate-200 { color: #e2e8f0; }
-        html.dark .text-red-500 { color: #f87171; }
+        html.dark .text-rose-500 { color: #fb7185; }
         html.dark .text-emerald-500 { color: #34d399; }
-        html.dark .text-purple-600 { color: #a78bfa; }
+        html.dark .text-indigo-600 { color: #a5b4fc; }
         html.dark .border-slate-100 { border-color: #334155; }
         html.dark .border-slate-200 { border-color: #475569; }
         html.dark .border-slate-50 { border-color: #334155; }
@@ -52,10 +52,10 @@
         <div class="md:col-span-7 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100">
             <div class="flex items-center gap-3 mb-8 flex-wrap">
                 <h1 class="text-xl font-bold text-slate-800 mr-2">剩余价值计算器</h1>
-                <button onclick="openModal()" class="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded transition-colors shadow-sm">
+                <button onclick="openModal()" class="px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded transition-colors shadow-sm">
                     货币转换
                 </button>
-                <button class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded shadow-sm cursor-default">
+                <button class="px-3 py-1 bg-cyan-500 text-white text-sm font-medium rounded shadow-sm cursor-default">
                     计算器
                 </button>
                 <button onclick="toggleDark()" class="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600 text-sm font-medium rounded transition-colors shadow-sm" title="切换暗黑模式">
@@ -74,13 +74,13 @@
                         参考汇率 
                         <span id="rateUpdateTime" class="text-xs text-slate-500 font-normal block mt-0.5 mb-2"></span>
                     </label>
-                    <input type="number" id="exchangeRate" step="0.0001" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors text-sm">
+                    <input type="number" id="exchangeRate" step="0.0001" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors text-sm">
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">原币种</label>
-                        <select id="vpsCurrency" onchange="updateRateDisplay()" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer text-sm shadow-sm">
+                        <select id="vpsCurrency" onchange="updateRateDisplay()" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
                             <option value="USD" selected>美元 (USD)</option>
                             <option value="CNY">人民币 (CNY)</option>
                             <option value="GBP">英镑 (GBP)</option>
@@ -96,7 +96,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">交易/结算币种</label>
-                        <select id="targetCurrency" onchange="updateRateDisplay()" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer text-sm shadow-sm">
+                        <select id="targetCurrency" onchange="updateRateDisplay()" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
                             <option value="CNY" selected>人民币 (CNY)</option>
                             <option value="USD">美元 (USD)</option>
                             <option value="GBP">英镑 (GBP)</option>
@@ -114,13 +114,13 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-800 mb-1">续费金额 (原币种)</label>
-                    <input type="number" id="price" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors text-sm shadow-sm" placeholder="如: 39.9">
+                    <input type="number" id="price" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors text-sm shadow-sm" placeholder="如: 39.9">
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">付款周期</label>
-                        <select id="cycle" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer text-sm shadow-sm">
+                        <select id="cycle" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
                             <option value="1">月付</option>
                             <option value="3">季付</option>
                             <option value="6">半年付</option>
@@ -132,22 +132,22 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">到期时间</label>
-                        <input type="date" id="endDate" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm shadow-sm">
+                        <input type="date" id="endDate" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm shadow-sm">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">交易日期</label>
-                        <input type="date" id="todayDate" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm shadow-sm">
+                        <input type="date" id="todayDate" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm shadow-sm">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">实际成交金额 (可选)</label>
-                        <input type="number" id="actualPrice" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors text-sm shadow-sm" placeholder="计算溢价用">
+                        <input type="number" id="actualPrice" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors text-sm shadow-sm" placeholder="计算溢价用">
                     </div>
                 </div>
 
-                <button onclick="calculate()" class="w-full mt-6 flex justify-center py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                <button onclick="calculate()" class="w-full mt-6 flex justify-center py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 transition-colors">
                     计算剩余价值
                 </button>
             </div>
@@ -166,7 +166,7 @@
                     
                     <div class="flex justify-between items-center border-b border-slate-50 pb-3">
                         <span class="text-sm font-medium text-slate-500">剩余价值</span>
-                        <span class="font-bold text-lg text-purple-600"><span id="resValueSymbol"></span> <span id="resValue">-</span></span>
+                        <span class="font-bold text-lg text-indigo-600"><span id="resValueSymbol"></span> <span id="resValue">-</span></span>
                     </div>
 
                     <div class="flex justify-between items-center border-b border-slate-50 pb-3">
@@ -202,13 +202,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-600 mb-1">金额</label>
-                    <input type="number" id="convAmount" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="输入金额">
+                    <input type="number" id="convAmount" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="输入金额">
                 </div>
                 
                 <div class="flex items-center gap-2">
                     <div class="flex-1">
                         <label class="block text-sm font-medium text-slate-600 mb-1">从</label>
-                        <select id="convFrom" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"></select>
+                        <select id="convFrom" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm"></select>
                     </div>
                     
                     <button onclick="swapCurrency()" class="mt-6 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 transition-colors" title="互换币种">
@@ -217,13 +217,13 @@
 
                     <div class="flex-1">
                         <label class="block text-sm font-medium text-slate-600 mb-1">到</label>
-                        <select id="convTo" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"></select>
+                        <select id="convTo" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm"></select>
                     </div>
                 </div>
 
                 <div id="modalRateHint" class="text-center text-sm font-medium text-slate-500 mt-2 h-5"></div>
 
-                <button onclick="convertCurrency()" class="w-full mt-2 py-3 px-4 rounded-lg shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                <button onclick="convertCurrency()" class="w-full mt-2 py-3 px-4 rounded-lg shadow-sm text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400 transition-colors">
                     转换
                 </button>
 
@@ -348,7 +348,7 @@
                     updateRateDisplay();
                     updateModalRateHint();
                 } else {
-                    document.getElementById('apiStatus').innerHTML = '<span class="align-middle text-red-500">获取失败，请手动输入汇率</span>';
+                    document.getElementById('apiStatus').innerHTML = '<span class="align-middle text-rose-500">获取失败，请手动输入汇率</span>';
                     document.getElementById('rateUpdateTime').innerText = '(获取失败)';
                 }
             }
@@ -409,7 +409,7 @@
                 
                 if (premium > 0) {
                     document.getElementById('resPremium').innerText = `+${symbol}${premium.toFixed(2)} (溢价)`;
-                    premiumWrap.className = "font-bold text-lg text-red-500";
+                    premiumWrap.className = "font-bold text-lg text-rose-500";
                 } else if (premium < 0) {
                     document.getElementById('resPremium').innerText = `${symbol}${premium.toFixed(2)} (折价)`;
                     premiumWrap.className = "font-bold text-lg text-emerald-500";
