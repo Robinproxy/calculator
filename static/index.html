@@ -324,10 +324,8 @@
 
         function initDefaults() {
             const today = new Date();
-            const todayEl = document.getElementById('todayDate');
-            const endEl = document.getElementById('endDate');
-            if (!todayEl.value) todayEl.value = today.toISOString().split('T')[0];
-            if (!endEl.value) endEl.value = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()).toISOString().split('T')[0];
+            document.getElementById('todayDate').value = today.toISOString().split('T')[0];
+            document.getElementById('endDate').value = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()).toISOString().split('T')[0];
         }
 
         document.getElementById('convFrom').innerHTML = currencyOptionsHTML;
@@ -455,6 +453,8 @@
             saveInputs();
             calculate();
         }
+
+        function copyResultText() {
             const targetCurr = document.getElementById('targetCurrency').value;
             const symbol = currencySymbols[targetCurr] || '';
             const remain = document.getElementById('resRemainDays').innerText;
