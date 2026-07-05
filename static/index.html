@@ -38,6 +38,7 @@
         html.dark .border-slate-50 { border-color: #334155; }
         html.dark .hover\:bg-slate-200:hover { background-color: #475569; }
         html.dark .hover\:bg-slate-300:hover { background-color: #475569; }
+        html.dark .hover\:bg-slate-100:hover { background-color: #334155; }
         html.dark .hover\:text-slate-600:hover { color: #cbd5e1; }
         html.dark input, html.dark select { background-color: #1e293b; border-color: #475569; color: #f1f5f9; }
         html.dark #currencyModal > div { background-color: #1e293b; }
@@ -157,9 +158,14 @@
                     </div>
                 </div>
 
-                <button onclick="calculate()" class="w-full mt-6 flex justify-center py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 transition-colors">
-                    计算剩余价值
-                </button>
+                <div class="flex gap-3">
+                    <button onclick="calculate()" class="flex-1 py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 transition-colors">
+                        计算剩余价值
+                    </button>
+                    <button onclick="clearInputs()" class="py-3.5 px-5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors">
+                        清除
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -291,7 +297,6 @@
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('change', saveInputs);
             });
-            document.getElementById('actualPrice').addEventListener('input', calculate);
         }
 
         function showToast(msg) {
@@ -444,7 +449,12 @@
             saveInputs();
         }
 
-        function copyResultText() {
+        function clearInputs() {
+            document.getElementById('price').value = '';
+            document.getElementById('actualPrice').value = '';
+            saveInputs();
+            calculate();
+        }
             const targetCurr = document.getElementById('targetCurrency').value;
             const symbol = currencySymbols[targetCurr] || '';
             const remain = document.getElementById('resRemainDays').innerText;
