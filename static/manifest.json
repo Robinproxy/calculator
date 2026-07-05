@@ -1,0 +1,17 @@
+{
+  "name": "剩余价值计算器",
+  "short_name": "价值计算器",
+  "description": "VPS 剩余价值计算器，支持按天折算、11种货币实时汇率、溢价分析",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
