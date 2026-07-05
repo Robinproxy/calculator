@@ -43,6 +43,16 @@
         html.dark #currencyModal > div { background-color: #1e293b; }
         html.dark #convResultBox { background-color: #0f172a; border-color: #475569; }
         html.dark .bg-slate-900\/40 { background-color: rgba(0, 0, 0, 0.7); }
+
+        #toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            padding: 10px 24px; border-radius: 10px; font-size: 14px; font-weight: 500;
+            background: #1e293b; color: #f1f5f9; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100;
+            white-space: nowrap;
+        }
+        #toast.show { opacity: 1; }
+        html.dark #toast { background: #f1f5f9; color: #1e293b; }
     </style>
 </head>
 <body class="bg-slate-50 flex items-center justify-center min-h-screen text-slate-800 p-4 md:p-8 font-sans">
@@ -235,6 +245,8 @@
         </div>
     </div>
 
+    <div id="toast"></div>
+
     <script>
         let globalRates = {};
 
@@ -268,7 +280,7 @@
                 const v = localStorage.getItem('calc_'+id);
                 if (v) {
                     const el = document.getElementById(id);
-                    if (el.type === 'date') el.valueAsDate = new Date(v);
+                    if (el.type === 'date') el.value = v;
                     else el.value = v;
                 }
             });
@@ -279,6 +291,13 @@
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('change', saveInputs);
             });
+            document.getElementById('actualPrice').addEventListener('input', calculate);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
+            clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('show'), 2000);
         }
 
         function parseURLParams() {
@@ -289,7 +308,7 @@
                 if (v) {
                     const el = document.getElementById(id);
                     if (el) {
-                        if (el.type === 'date') el.valueAsDate = new Date(v);
+                        if (el.type === 'date') el.value = v;
                         else el.value = v;
                         restored = true;
                     }
@@ -302,8 +321,8 @@
             const today = new Date();
             const todayEl = document.getElementById('todayDate');
             const endEl = document.getElementById('endDate');
-            if (!todayEl.value) todayEl.valueAsDate = today;
-            if (!endEl.value) endEl.valueAsDate = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+            if (!todayEl.value) todayEl.value = today.toISOString().split('T')[0];
+            if (!endEl.value) endEl.value = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()).toISOString().split('T')[0];
         }
 
         document.getElementById('convFrom').innerHTML = currencyOptionsHTML;
@@ -379,7 +398,7 @@
             const symbol = currencySymbols[targetCurr] || '';
 
             if (isNaN(price) || isNaN(exchangeRate) || !endDate.getTime() || !todayDate.getTime()) {
-                alert("⚠️ 请完整填写【续费金额】和【日期】信息！");
+                showToast("⚠️ 请完整填写【续费金额】和【日期】信息！");
                 return;
             }
 
@@ -434,7 +453,7 @@
             const premium = document.getElementById('resPremium').innerText;
 
             if (value === '-') {
-                alert("请先进行计算！");
+                showToast("请先进行计算！");
                 return;
             }
 
@@ -456,9 +475,9 @@
             text += `\n[查看计算](${url.toString()})`;
 
             navigator.clipboard.writeText(text).then(() => {
-                alert("✅ 结果已复制到剪贴板！");
-            }).catch(err => {
-                alert("❌ 复制失败，请手动记录");
+                showToast("✅ 已复制到剪贴板");
+            }).catch(() => {
+                showToast("❌ 复制失败");
             });
         }
 
@@ -502,6 +521,9 @@
         modal.addEventListener('click', function(e) {
             if (e.target === modal) closeModal();
         });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
 
         function swapCurrency() {
             const fromSelect = document.getElementById('convFrom');
@@ -532,11 +554,11 @@
             const toCurr = document.getElementById('convTo').value;
 
             if (isNaN(amount)) {
-                alert("请输入有效的金额！");
+                showToast("请输入有效的金额！");
                 return;
             }
             if (Object.keys(globalRates).length === 0) {
-                alert("汇率尚未加载完成，请稍后再试。");
+                showToast("汇率尚未加载完成");
                 return;
             }
 
