@@ -328,12 +328,14 @@
                 return;
             }
 
-            let text = `【剩余价值评估】\n`;
-            text += `剩余天数: ${remain} 天\n`;
-            text += `剩余价值: ${symbol}${value} (${targetCurr})\n`;
+            let text = `## 剩余价值评估\n\n`;
+            text += `| 项目 | 数值 |\n`;
+            text += `|------|------|\n`;
+            text += `| 剩余天数 | ${remain} 天 |\n`;
+            text += `| 剩余价值 | ${symbol}${value} (${targetCurr}) |\n`;
             if (actual !== '-') {
-                text += `交易金额: ${symbol}${actual}\n`;
-                text += `溢价情况: ${premium}\n`;
+                text += `| 交易金额 | ${symbol}${actual} |\n`;
+                text += `| 溢价情况 | ${premium} |\n`;
             }
 
             navigator.clipboard.writeText(text).then(() => {
