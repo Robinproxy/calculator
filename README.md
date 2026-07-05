@@ -41,9 +41,7 @@
 
 ## 🚀 Live Demo
 
-**→ https://calculator.你的域名.com** (部署在 Cloudflare Pages)
-
-Or deploy your own:
+Deploy your own:
 
 [![Deploy to Cloudflare Pages](https://img.shields.io/badge/Deploy%20to-CF%20Pages-F38020?logo=cloudflare)](https://dash.cloudflare.com/?to=/:account/pages/)
 
@@ -128,9 +126,7 @@ That's it — **one HTML file**, zero dependencies, zero build step.
 
 ## 🚀 在线演示
 
-**→ https://calculator.你的域名.com** (部署在 Cloudflare Pages)
-
-或者一键部署自己的版本：
+一键部署自己的版本：
 
 ```
 1. Fork 本仓库
