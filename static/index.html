@@ -325,7 +325,7 @@
         function initDefaults() {
             const today = new Date();
             document.getElementById('todayDate').value = today.toISOString().split('T')[0];
-            document.getElementById('endDate').value = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()).toISOString().split('T')[0];
+            document.getElementById('endDate').value = today.toISOString().split('T')[0];
         }
 
         document.getElementById('convFrom').innerHTML = currencyOptionsHTML;
@@ -457,6 +457,9 @@
         function copyResultText() {
             const targetCurr = document.getElementById('targetCurrency').value;
             const symbol = currencySymbols[targetCurr] || '';
+            const vpsCurr = document.getElementById('vpsCurrency').value;
+            const vpsSymbol = currencySymbols[vpsCurr] || '';
+            const price = document.getElementById('price').value;
             const remain = document.getElementById('resRemainDays').innerText;
             const value = document.getElementById('resValue').innerText;
             const actual = document.getElementById('resActual').innerText;
@@ -471,18 +474,14 @@
             text += `| 项目 | 数值 |\n`;
             text += `|------|------|\n`;
             text += `| 剩余天数 | ${remain} 天 |\n`;
+            if (price) {
+                text += `| 续费金额 | ${vpsSymbol}${price} (${vpsCurr}) |\n`;
+            }
             text += `| 剩余价值 | ${symbol}${value} (${targetCurr}) |\n`;
             if (actual !== '-') {
                 text += `| 交易金额 | ${symbol}${actual} |\n`;
                 text += `| 溢价情况 | ${premium} |\n`;
             }
-
-            const url = new URL(window.location.origin + window.location.pathname);
-            STORAGE_KEYS.forEach(id => {
-                const el = document.getElementById(id);
-                if (el && el.value) url.searchParams.set(id, el.value);
-            });
-            text += `\n[查看计算](${url.toString()})`;
 
             navigator.clipboard.writeText(text).then(() => {
                 showToast("✅ 已复制到剪贴板");
