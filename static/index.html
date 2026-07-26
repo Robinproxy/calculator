@@ -99,7 +99,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">原币种</label>
-                        <select id="vpsCurrency" onchange="updateRateDisplay()" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
+                        <select id="vpsCurrency" onchange="updateRateDisplay(true)" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
                             <option value="USD" selected>美元 (USD)</option>
                             <option value="CNY">人民币 (CNY)</option>
                             <option value="GBP">英镑 (GBP)</option>
@@ -115,7 +115,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-800 mb-1">交易/结算币种</label>
-                        <select id="targetCurrency" onchange="updateRateDisplay()" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
+                        <select id="targetCurrency" onchange="updateRateDisplay(true)" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer text-sm shadow-sm">
                             <option value="CNY" selected>人民币 (CNY)</option>
                             <option value="USD">美元 (USD)</option>
                             <option value="GBP">英镑 (GBP)</option>
@@ -361,6 +361,10 @@
             clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('show'), 2000);
         }
 
+        // 链接里带了汇率时锁定它，避免被实时汇率覆盖，保证对方看到与分享时一致的结果；
+        // 手动切换币种后解锁，恢复实时汇率
+        let urlRateLocked = false;
+
         function parseURLParams() {
             const params = new URLSearchParams(window.location.search);
             let restored = false;
@@ -375,6 +379,7 @@
                     }
                 }
             });
+            urlRateLocked = !!params.get('exchangeRate');
             return restored;
         }
 
@@ -435,7 +440,9 @@
             }
         }
 
-        function updateRateDisplay() {
+        function updateRateDisplay(userTriggered) {
+            if (userTriggered) urlRateLocked = false;
+            if (urlRateLocked) return;
             const vpsCurr = document.getElementById('vpsCurrency').value;
             const targetCurr = document.getElementById('targetCurrency').value;
 
@@ -515,7 +522,18 @@
             document.getElementById('price').value = '';
             document.getElementById('actualPrice').value = '';
             saveInputs();
-            calculate();
+            resetResults();
+        }
+
+        function resetResults() {
+            document.getElementById('resRemainDays').innerText = '-';
+            document.getElementById('resValueSymbol').innerText = '';
+            document.getElementById('resValue').innerText = '-';
+            document.getElementById('resActualSymbol').innerText = '';
+            document.getElementById('resActual').innerText = '-';
+            document.getElementById('resPremium').innerText = '-';
+            document.getElementById('resPremiumWrap').className = "font-bold text-lg text-slate-800";
+            document.getElementById('emptyHint').classList.remove('hidden');
         }
 
         function copyResultText() {
@@ -803,6 +821,10 @@
             initDefaults();
             addAutoSave();
             fetchRates();
+            // 打开分享链接时自动计算，对方无需再点一次按钮
+            if (hasParams && document.getElementById('price').value && document.getElementById('exchangeRate').value) {
+                calculate();
+            }
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/sw.js');
             }
