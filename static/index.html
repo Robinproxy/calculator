@@ -180,17 +180,18 @@
         <div class="md:col-span-5 space-y-6">
             
             <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8 h-full flex flex-col">
-                <h2 class="text-lg font-bold text-slate-800 mb-6 text-center">计算结果</h2>
-                
+                <h2 class="text-lg font-bold text-slate-800 mb-3 text-center">计算结果</h2>
+                <p id="emptyHint" class="text-center text-sm text-slate-400 mb-4">填写左侧信息后点击"计算剩余价值"</p>
+
                 <div class="space-y-4 flex-1">
+                    <div class="flex justify-between items-center bg-indigo-50 rounded-lg px-4 py-3.5">
+                        <span class="text-sm font-medium text-indigo-600">剩余价值</span>
+                        <span class="font-bold text-xl text-indigo-600"><span id="resValueSymbol"></span> <span id="resValue">-</span></span>
+                    </div>
+
                     <div class="flex justify-between items-center border-b border-slate-50 pb-3">
                         <span class="text-sm font-medium text-slate-500">剩余天数</span>
                         <span class="font-semibold text-slate-800"><span id="resRemainDays">-</span> 天</span>
-                    </div>
-                    
-                    <div class="flex justify-between items-center border-b border-slate-50 pb-3">
-                        <span class="text-sm font-medium text-slate-500">剩余价值</span>
-                        <span class="font-bold text-lg text-indigo-600"><span id="resValueSymbol"></span> <span id="resValue">-</span></span>
                     </div>
 
                     <div class="flex justify-between items-center border-b border-slate-50 pb-3">
@@ -480,6 +481,7 @@
             const residualValueOriginal = (price / totalDays) * remainDays;
             const residualValueTarget = residualValueOriginal * exchangeRate;
 
+            document.getElementById('emptyHint').classList.add('hidden');
             document.getElementById('resRemainDays').innerText = remainDays;
             document.getElementById('resValueSymbol').innerText = symbol;
             document.getElementById('resValue').innerText = residualValueTarget.toFixed(2);
