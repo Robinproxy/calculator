@@ -1,4 +1,4 @@
-const CACHE_NAME = 'calculator-v3';
+const CACHE_NAME = 'calculator-v4';
 const URLS_TO_CACHE = ['/', '/tailwind.css', '/favicon.svg', '/apple-touch-icon.png', '/manifest.json'];
 
 self.addEventListener('install', event => {

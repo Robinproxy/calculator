@@ -49,6 +49,8 @@
         html.dark #calcDisplayBox { background-color: #0f172a; border-color: #475569; }
         html.dark .bg-indigo-100 { background-color: #3730a3; }
         html.dark .hover\:bg-indigo-200:hover { background-color: #4338ca; }
+        html.dark .bg-indigo-50 { background-color: #312e81; }
+        html.dark .hover\:bg-indigo-100:hover { background-color: #3730a3; }
         html.dark .bg-slate-900\/40 { background-color: rgba(0, 0, 0, 0.7); }
 
         #toast {
@@ -69,13 +71,13 @@
         <div class="md:col-span-7 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100">
             <div class="flex items-center gap-3 mb-8 flex-wrap">
                 <h1 class="text-xl font-bold text-slate-800 mr-2">剩余价值计算器</h1>
-                <button onclick="openModal()" class="px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded transition-colors shadow-sm">
+                <button onclick="openModal()" class="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 text-sm font-medium rounded-lg transition-colors">
                     货币转换
                 </button>
-                <button onclick="openCalcModal()" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded transition-colors shadow-sm">
+                <button onclick="openCalcModal()" class="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 text-sm font-medium rounded-lg transition-colors">
                     计算器
                 </button>
-                <button onclick="toggleDark()" aria-label="切换暗黑模式" class="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600 text-sm font-medium rounded transition-colors shadow-sm" title="切换暗黑模式">
+                <button onclick="toggleDark()" aria-label="切换暗黑模式" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-medium rounded-lg transition-colors" title="切换暗黑模式">
                     <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                     <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                 </button>
@@ -230,13 +232,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-600 mb-1">金额</label>
-                    <input type="number" id="convAmount" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="输入金额">
+                    <input type="number" id="convAmount" step="0.01" class="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="输入金额">
                 </div>
                 
                 <div class="flex items-center gap-2">
                     <div class="flex-1">
                         <label class="block text-sm font-medium text-slate-600 mb-1">从</label>
-                        <select id="convFrom" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm"></select>
+                        <select id="convFrom" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm"></select>
                     </div>
                     
                     <button onclick="swapCurrency()" class="mt-6 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 transition-colors" title="互换币种">
@@ -245,13 +247,13 @@
 
                     <div class="flex-1">
                         <label class="block text-sm font-medium text-slate-600 mb-1">到</label>
-                        <select id="convTo" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm"></select>
+                        <select id="convTo" class="block w-full px-2 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm"></select>
                     </div>
                 </div>
 
                 <div id="modalRateHint" class="text-center text-sm font-medium text-slate-500 mt-2 h-5"></div>
 
-                <button onclick="convertCurrency()" class="w-full mt-2 py-3 px-4 rounded-lg shadow-sm text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400 transition-colors">
+                <button onclick="convertCurrency()" class="w-full mt-2 py-3 px-4 rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 transition-colors">
                     转换
                 </button>
 
