@@ -32,6 +32,7 @@
 | 💱 **11 Currencies** | USD, CNY, EUR, GBP, JPY, KRW, HKD, TWD, CAD, SGD, AUD |
 | 🔄 **Live Exchange Rates** | Fetched from ExchangeRate-API, with local cache fallback |
 | 📈 **Premium/Discount** | Compare actual trade price against calculated residual value |
+| 🧮 **Basic Calculator** | Built-in standard calculator with keyboard support |
 | 🔗 **URL Sharing** | All parameters encoded in URL — share the link, not a screenshot |
 | 🌙 **Dark Mode** | Toggle manually or auto-follows system preference |
 | 📋 **Markdown Export** | Copy results as a formatted Markdown table |
@@ -117,6 +118,7 @@ That's it — **one HTML file**, zero dependencies, zero build step.
 | 💱 **11 种货币** | 美元、人民币、欧元、英镑、日元、韩元、港元、新台币、加元、新加坡元、澳元 |
 | 🔄 **实时汇率** | 自动获取 ExchangeRate-API 汇率，断网时使用本地缓存 |
 | 📈 **溢价分析** | 输入实际成交价，自动计算是溢价还是折价（红/绿标识） |
+| 🧮 **普通计算器** | 内置基础计算器，支持四则运算、百分比和键盘输入 |
 | 🔗 **URL 分享** | 所有参数编码在链接中，发链接就能让别人看到你的计算结果 |
 | 🌙 **暗黑模式** | 手动切换或自动跟随系统设置 |
 | 📋 **Markdown 导出** | 一键复制结果表格，方便粘贴到论坛/Telegram/Discord |
